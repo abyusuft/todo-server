@@ -74,6 +74,12 @@ async function run() {
             const result = await taskCollection.findOne(query);
             res.send(result);
         })
+        app.get('/task', async (req, res) => {
+            const query = {};
+            const cursor = taskCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
 
         // Get Pending Task List
         app.get('/pendingtask/:email', async (req, res) => {
