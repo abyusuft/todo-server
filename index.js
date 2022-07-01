@@ -68,6 +68,12 @@ async function run() {
             const insert = await taskCollection.insertOne(task);
             res.send(insert);
         })
+        app.get('/task/:id', async (req, res) => {
+            const taskid = req.params.id;
+            const query = { _id: ObjectId(taskid) };
+            const result = await taskCollection.findOne(query);
+            res.send(result);
+        })
 
         // Get Pending Task List
         app.get('/pendingtask/:email', async (req, res) => {
