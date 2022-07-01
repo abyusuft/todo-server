@@ -101,6 +101,7 @@ async function run() {
             const result = await taskCollection.updateOne(filter, doc);
             res.send(result);
         })
+
         app.put('/update/:id', verifyJWT, async (req, res) => {
             const id = req.params.id;
             const task = req.body;
