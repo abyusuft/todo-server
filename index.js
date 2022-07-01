@@ -101,6 +101,22 @@ async function run() {
             const result = await taskCollection.updateOne(filter, doc);
             res.send(result);
         })
+        app.put('/update/:id', verifyJWT, async (req, res) => {
+            const id = req.params.id;
+            const task = req.body;
+            const filter = { _id: ObjectId(id) };
+            const option = { upsert: true };
+            const doc = {
+                $set: {
+                    email: task?.email,
+                    task: task?.task,
+                    detail: task?.detail,
+
+                },
+            }
+            const result = await taskCollection.updateOne(filter, doc, option);
+            res.send(result);
+        })
 
 
 
